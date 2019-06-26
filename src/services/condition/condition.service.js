@@ -1,17 +1,23 @@
 /*eslint no-unused-vars: "warn"*/
 
-const { RESOURCES } = require('@asymmetrik/node-fhir-server-core').constants;
-const FHIRServer = require('@asymmetrik/node-fhir-server-core');
+
+
 const { ObjectID } = require('mongodb');
+const { VERSIONS } = require('@asymmetrik/node-fhir-server-core').constants;
+const { resolveSchema } = require('@asymmetrik/node-fhir-server-core');
+
+const { getUuid } = require('../../utils/uid.util');
+
+const logger = require('@asymmetrik/node-fhir-server-core').loggers.get();
 
 let getCondition = (base_version) => {
-	return require(FHIRServer.resolveFromVersion(base_version, RESOURCES.CONDITION));};
+	return require(resolveSchema(base_version, "Condition"));};
 
 let getMeta = (base_version) => {
-	return require(FHIRServer.resolveFromVersion(base_version, RESOURCES.META));};
+	return require(resolveSchema(base_version, "Meta"));};
 
 module.exports.search = (args, context, logger) => new Promise((resolve, reject) => {
-	logger.info('Condition >>> search');
+	//logger.info('Condition >>> search');
 
 	// Common search params
 	let { base_version, _content, _format, _id, _lastUpdated, _profile, _query, _security, _tag } = args;
