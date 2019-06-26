@@ -1,4 +1,4 @@
-const { VERSIONS } = require('@asymmetrik/node-fhir-server-core').constants;
+onst { VERSIONS } = require('@asymmetrik/node-fhir-server-core').constants;
 const env = require('var');
 
 
@@ -81,6 +81,19 @@ let fhirServerConfig = {
 	// },
 	//
 	profiles: {
+		Patient: {
+			service: './src/services/patient/patient.service.js',
+			versions: [ VERSIONS['4_0_0'] ]
+		},
+		Encounter: {
+			service: './src/services/encounter/encounter.service.js',
+			versions: [ VERSIONS['4_0_0'] ]
+		},
+		Observation: {
+			service: './src/services/observation/observation.service.js',
+			versions: [ VERSIONS['4_0_0'] ]
+		},
+		//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	
 		AllergyIntolerance: {
 			service: './src/services/allergyintolerance/allergyintolerance.service.js',
 			versions: [ VERSIONS['4_0_0'] ]
@@ -89,10 +102,19 @@ let fhirServerConfig = {
 			service: './src/services/organization/organization.service.js',
 			versions: [ VERSIONS['4_0_0'] ]
 		},
-		Patient: {
-			service: './src/services/patient/patient.service.js',
+		
+		Condition: {
+			service: './src/services/condition/condition.service.js',
 			versions: [ VERSIONS['4_0_0'] ]
 		},
+		Bundle: {
+			service: './src/services/bundle/bundle.service.js',
+			versions: [ VERSIONS['4_0_0'] ]
+		},
+		DiagnosticReport: {
+			service: './src/services/diagnosticreport/diagnosticreport.service.js',
+			versions: [ VERSIONS['4_0_0'] ]
+		}
 	}
 };
 
