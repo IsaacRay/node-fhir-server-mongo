@@ -411,7 +411,6 @@ let buildDstu2SearchQuery = (args) =>	 {
  */
 module.exports.search = (args) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> search');
-
 	let { base_version } = args;
 	let query = {};
 
@@ -419,6 +418,8 @@ module.exports.search = (args) => new Promise((resolve, reject) => {
 		query = buildStu3SearchQuery(args);
 	} else if (base_version === VERSIONS['1_0_2']) {
 		query = buildDstu2SearchQuery(args);
+	} else if (base_version === VERSIONS['4_0_0']){
+		query = buildStu3SearchQuery(args);
 	}
 
 	// Grab an instance of our DB and collection
@@ -445,7 +446,7 @@ module.exports.search = (args) => new Promise((resolve, reject) => {
 
 module.exports.searchById = (args) => new Promise((resolve, reject) => {
 	logger.info('Patient >>> searchById');
-
+	console.log(args)
 	let { base_version, id } = args;
 	let Patient = getPatient(base_version);
 
@@ -659,6 +660,8 @@ module.exports.history = (args, context) => new Promise((resolve, reject) => {
 		query = buildStu3SearchQuery(args);
 	} else if (base_version === VERSIONS['1_0_2']) {
 		query = buildDstu2SearchQuery(args);
+	} else if (base_version === VERSIONS['4_0_0']){
+		query = buildStu3SearchQuery(args);
 	}
 
 	// Grab an instance of our DB and collection
@@ -693,6 +696,8 @@ module.exports.historyById = (args, context) => new Promise((resolve, reject) =>
 		query = buildStu3SearchQuery(args);
 	} else if (base_version === VERSIONS['1_0_2']) {
 		query = buildDstu2SearchQuery(args);
+	} else if (base_version === VERSIONS['4_0_0']){
+		query = buildStu3SearchQuery(args);
 	}
 
 	query.id = `${id}`;
